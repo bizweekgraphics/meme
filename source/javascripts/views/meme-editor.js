@@ -65,6 +65,7 @@ MEME.MemeEditorView = Backbone.View.extend({
     this.$('#font-family').val(d.fontFamily);
     this.$('#text-align').val(d.textAlign);
     this.$('#text-shadow').prop('checked', d.textShadow);
+    this.$('#overlay-alpha').val(d.overlayAlpha);
     this.$('#overlay').find('[value="'+d.overlayColor+'"]').prop('checked', true);
   },
 
@@ -77,6 +78,7 @@ MEME.MemeEditorView = Backbone.View.extend({
     'change #watermark': 'onWatermark',
     'change #text-align': 'onTextAlign',
     'change #text-shadow': 'onTextShadow',
+    'input #overlay-alpha': 'onOverlayAlpha',
     'change [name="overlay"]': 'onOverlayColor',
     'dragover #dropzone': 'onZoneOver',
     'dragleave #dropzone': 'onZoneOut',
@@ -114,6 +116,10 @@ MEME.MemeEditorView = Backbone.View.extend({
 
   onScale: function() {
     this.model.set('imageScale', this.$('#image-scale').val());
+  },
+
+  onOverlayAlpha: function() {
+    this.model.set('overlayAlpha', this.$('#overlay-alpha').val());
   },
 
   onOverlayColor: function(evt) {
