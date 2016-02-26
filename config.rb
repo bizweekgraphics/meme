@@ -29,8 +29,9 @@ set :absolute_prefix, 'http://localhost:4567'
 # Build-specific configuration
 configure :build do
   puts "local build"
-  set :url_prefix, "/"
-  set :absolute_prefix, "http://www.bizweekgraphics.com/meme"
+  # set :url_prefix, "/"
+  set :http_prefix, '/meme/build'
+  # set :absolute_prefix, "http://www.bizweekgraphics.com/meme"
   activate :asset_hash
   activate :minify_javascript
   activate :minify_css
