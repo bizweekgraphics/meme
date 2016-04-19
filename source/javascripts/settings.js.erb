@@ -47,16 +47,29 @@ var MEME_SETTINGS = {
   watermarkMaxWidthRatio: 0.25, // Maximum allowed width of watermark (percentage of total canvas width).
 
   // Path to the watermark image source, or blank for no watermark:
-  // Alternatively, use '<%= asset_data_uri("business.png") %>' to populate the watermark with base64 data, avoiding Cross-Origin issues.
-  watermarkSrc: (localStorage && localStorage.getItem('meme_watermark')) || '<%= image_path("business.png") %>',
+  // Alternatively, use '<%= asset_data_uri("Bloomberg.svg") %>' to populate the watermark with base64 data, avoiding Cross-Origin issues.
+  watermarkSrc: (localStorage && localStorage.getItem('meme_watermark')) || '<%= image_path("Bloomberg-white.svg") %>',
   
   // Watermark image options: set to empty array to disable watermark picker.
   // NOTE: only populate the "data" attributes with base64 data when concerned about Cross-Origin requests...
   // Otherwise, just leave "data" attributes blank and allow images to load from your server.
   watermarkOpts: [
-    {text: 'Businessweek', value: '<%= image_path("bw.png") %>', data: ''},
-    {text: 'Business', value: '<%= image_path("business.png") %>', data: ''},
-    {text: 'Politics', value: '<%= image_path("politics.png") %>', data: ''}
+    {text: 'Bloomberg white', value: '<%= image_path("Bloomberg-white.svg") %>', data: ''},
+    {text: 'Bloomberg', value: '<%= image_path("Bloomberg.svg") %>', data: ''},
+    {text: 'Businessweek white', value: '<%= image_path("Businessweek-white.svg") %>', data: ''},
+    {text: 'Businessweek', value: '<%= image_path("Businessweek.svg") %>', data: ''},
+    {text: 'Gadfly white', value: '<%= image_path("Gadfly-white.svg") %>', data: ''},
+    {text: 'Gadfly', value: '<%= image_path("Gadfly.svg") %>', data: ''},
+    {text: 'Markets white', value: '<%= image_path("Markets-white.svg") %>', data: ''},
+    {text: 'Markets', value: '<%= image_path("Markets.svg") %>', data: ''},
+    {text: 'Politics white', value: '<%= image_path("Politics-white.svg") %>', data: ''},
+    {text: 'Politics', value: '<%= image_path("Politics.svg") %>', data: ''},
+    {text: 'Pursuits white', value: '<%= image_path("Pursuits-white.svg") %>', data: ''},
+    {text: 'Pursuits', value: '<%= image_path("Pursuits.svg") %>', data: ''},
+    {text: 'Tech white', value: '<%= image_path("Tech-white.svg") %>', data: ''},
+    {text: 'Tech', value: '<%= image_path("Tech.svg") %>', data: ''},
+    {text: 'View white', value: '<%= image_path("View-white.svg") %>', data: ''},
+    {text: 'View', value: '<%= image_path("View.svg") %>', data: ''}
   ],
 
   width: 755 // Canvas rendering width.
