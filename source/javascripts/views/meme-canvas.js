@@ -30,6 +30,8 @@ MEME.MemeCanvasView = Backbone.View.extend({
   },
 
   render: function() {
+
+    var self = this;
     // Return early if there is no valid canvas to render:
     if (!this.canvas) return;
 
@@ -42,7 +44,13 @@ MEME.MemeCanvasView = Backbone.View.extend({
     // Reset canvas display:
     this.canvas.width = d.width;
     this.canvas.height = d.height;
-    ctx.clearRect(0, 0, d.width, d.height);
+
+    if (d.instagram){
+      this.canvas.width = d.width;
+      this.canvas.height = d.width;
+    }
+
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     function renderBackground(ctx) {
       // Base height and width:
@@ -54,8 +62,8 @@ MEME.MemeCanvasView = Backbone.View.extend({
         // Set the base position if null
         var th = bh * d.imageScale;
         var tw = bw * d.imageScale;
-        var cx = d.backgroundPosition.x || d.width / 2;
-        var cy = d.backgroundPosition.y || d.height / 2;
+        var cx = d.backgroundPosition.x || self.canvas.width / 2;
+        var cy = d.backgroundPosition.y || self.canvas.height / 2;
 
         ctx.drawImage(m.background, 0, 0, bw, bh, cx-(tw/2), cy-(th/2), tw, th);
       }
@@ -66,7 +74,7 @@ MEME.MemeCanvasView = Backbone.View.extend({
         ctx.save();
         ctx.globalAlpha = d.overlayAlpha;
         ctx.fillStyle = d.overlayColor;
-        ctx.fillRect(0, 0, d.width, d.height);
+        ctx.fillRect(0, 0, self.canvas.width, self.canvas.height);
         ctx.globalAlpha = 1;
         ctx.restore();
       }
@@ -92,9 +100,9 @@ MEME.MemeCanvasView = Backbone.View.extend({
       // Text alignment:
       if (d.textAlign == 'center') {
         ctx.textAlign = 'center';
-        x = d.width / 2;
-        y = d.height - d.height / 1.5;
-        maxWidth = d.width - d.width / 3;
+        x = self.canvas.width / 2;
+        y = self.canvas.height - self.canvas.height / 1.5;
+        maxWidth = self.canvas.width - self.canvas.width / 3;
 
       } else if (d.textAlign == 'right' ) {
         ctx.textAlign = 'right';
@@ -130,7 +138,7 @@ MEME.MemeCanvasView = Backbone.View.extend({
       ctx.textAlign = 'left';
       ctx.fillStyle = d.fontColor;
       ctx.font = 'normal '+ d.creditSize +'pt '+ d.fontFamily;
-      ctx.fillText(d.creditText, padding, d.height - padding);
+      ctx.fillText(d.creditText, padding, self.canvas.height - padding);
     }
 
     function renderWatermark(ctx) {
@@ -143,6 +151,12 @@ MEME.MemeCanvasView = Backbone.View.extend({
         // Calculate watermark maximum width:
         var mw = d.width * d.watermarkMaxWidthRatio;
 
+
+        // ------------------------------------------------
+        // BUG HERE
+        //
+        
+
         // Constrain transformed height based on maximum allowed width:
         if (mw < bw) {
           th = bh * (mw / bw);
@@ -150,7 +164,7 @@ MEME.MemeCanvasView = Backbone.View.extend({
         }
 
         ctx.globalAlpha = d.watermarkAlpha;
-        ctx.drawImage(m.watermark, 0, 0, bw, bh, d.width-padding-tw, d.height-padding-th, tw, th);
+        ctx.drawImage(m.watermark, 0, 0, bw, bh, self.canvas.width - padding - tw, self.canvas.height - padding-th, tw, th);
         ctx.globalAlpha = 1;
       }
     }
@@ -191,6 +205,8 @@ MEME.MemeCanvasView = Backbone.View.extend({
     var start = d.backgroundPosition;
     start.x = start.x || d.width / 2;
     start.y = start.y || d.height / 2;
+
+
 
     // Create update function with draggable constraints:
     function update(evt) {
