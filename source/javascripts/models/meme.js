@@ -17,6 +17,7 @@ MEME.MemeModel = Backbone.Model.extend({
     height: 378,
     imageScale: 1,
     imageSrc: '',
+    instagram: false,
     overlayAlpha: 0.5,
     overlayColor: '#000',
     overlayColorOpts: ['#000', '#777', '#2980b9'],

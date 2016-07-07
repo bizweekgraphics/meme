@@ -62,6 +62,7 @@ MEME.MemeEditorView = Backbone.View.extend({
     this.$('#watermark').val(d.watermarkSrc);
     this.$('#image-scale').val(d.imageScale);
     this.$('#font-size').val(d.fontSize);
+    this.$('#instagram').prop('checked', d.instagram);
     this.$('#font-family').val(d.fontFamily);
     this.$('#text-align').val(d.textAlign);
     this.$('#text-shadow').prop('checked', d.textShadow);
@@ -82,7 +83,8 @@ MEME.MemeEditorView = Backbone.View.extend({
     'change [name="overlay"]': 'onOverlayColor',
     'dragover #dropzone': 'onZoneOver',
     'dragleave #dropzone': 'onZoneOut',
-    'drop #dropzone': 'onZoneDrop'
+    'drop #dropzone': 'onZoneDrop',
+    'change #instagram': 'onInstagram'
   },
 
   onCredit: function() {
@@ -107,6 +109,10 @@ MEME.MemeEditorView = Backbone.View.extend({
 
   onFontFamily: function() {
     this.model.set('fontFamily', this.$('#font-family').val());
+  },
+
+  onInstagram: function(){
+    this.model.set('instagram', this.$('#instagram').prop('checked'));
   },
 
   onWatermark: function() {
