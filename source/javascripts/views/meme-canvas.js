@@ -49,7 +49,11 @@ MEME.MemeCanvasView = Backbone.View.extend({
       this.canvas.width = d.width;
       this.canvas.height = d.width;
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     function renderBackground(ctx) {
@@ -152,6 +156,12 @@ MEME.MemeCanvasView = Backbone.View.extend({
         // Calculate watermark maximum width:
         var mw = self.canvas.width * d.watermarkMaxWidthRatio;
 
+
+        // ------------------------------------------------
+        // BUG HERE
+        //
+        
+
         // Constrain transformed height based on maximum allowed width:
         if (mw < bw) {
           th = bh * (mw / bw);
@@ -159,6 +169,7 @@ MEME.MemeCanvasView = Backbone.View.extend({
         }
 
         ctx.globalAlpha = d.watermarkAlpha;
+<<<<<<< HEAD
         ctx.drawImage(
           m.watermark,
           //sx
@@ -178,6 +189,9 @@ MEME.MemeCanvasView = Backbone.View.extend({
           //height
           th
         );
+=======
+        ctx.drawImage(m.watermark, 0, 0, bw, bh, self.canvas.width - padding - tw, self.canvas.height - padding-th, tw, th);
+>>>>>>> master
         ctx.globalAlpha = 1;
       }
     }
@@ -218,6 +232,8 @@ MEME.MemeCanvasView = Backbone.View.extend({
     var start = d.backgroundPosition;
     start.x = start.x || d.width / 2;
     start.y = start.y || d.height / 2;
+
+
 
     // Create update function with draggable constraints:
     function update(evt) {
